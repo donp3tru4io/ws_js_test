@@ -1,0 +1,23 @@
+version: '2'
+services:
+  rabbit:
+    build:
+      context: .
+      dockerfile: rabbit.dockerfile
+    container_name: rabbit
+    hostname: lightrabbit    
+    networks:
+      - rabnet
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password                 
+    ports:
+      - 15672:15672  
+      - 5672:5672    
+
+volumes:
+  rabbitdata:
+    driver: local
+networks:
+    rabnet:
+        driver: bridge
